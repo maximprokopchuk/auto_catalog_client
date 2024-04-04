@@ -219,5 +219,9 @@ export const {
   createCarModel,
 } = storehousesSlice.actions;
 
-export const { selectCountries, selectCitiesByCountries, selectCarModels, selectIsLoading } =
-  storehousesSlice.selectors;
+export const {
+  selectCountries,
+  selectCitiesByCountries,
+  selectCarModels,
+  selectIsLoading,
+} = storehousesSlice.selectors;

@@ -22,13 +22,14 @@ import {
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import NewEntityInput from "../../components/NewEntityInput";
 import { StorehouseNode, getTree } from "./helpers";
+import { setCityIdAndCarModelId } from "../../app/uiSlice";
 
 const Storehouses = () => {
   const dispatch = useAppDispatch();
   const countries = useAppSelector(selectCountries);
   const citiesByCountries = useAppSelector(selectCitiesByCountries);
   const carModels = useAppSelector(selectCarModels);
-  const isLoading = useAppSelector(selectIsLoading)
+  const isLoading = useAppSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchCountries());
@@ -49,7 +50,9 @@ const Storehouses = () => {
   const onSelect = (e: TreeEventNodeEvent) => {
     const sNode = e.node as StorehouseNode;
     if (sNode.type === "car_model") {
-      alert(sNode.key + " " + sNode.parentId);
+      const carModelId = sNode.key as number
+      const cityId = sNode.parentId as number
+      dispatch(setCityIdAndCarModelId({carModelId, cityId}));
     }
   };
   const onDelete = (
@@ -119,7 +122,7 @@ const Storehouses = () => {
   };
   return (
     <Tree
-        header={<h3>Storehouses</h3>}
+      header={<h3>Storehouses</h3>}
       value={tree}
       className="w-full md:w-30rem"
       onSelect={onSelect}
