@@ -17,6 +17,7 @@ import {
   deleteCity,
   deleteCarModel,
   createCarModel,
+  selectIsLoading,
 } from "./storehouseSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import NewEntityInput from "../../components/NewEntityInput";
@@ -27,6 +28,7 @@ const Storehouses = () => {
   const countries = useAppSelector(selectCountries);
   const citiesByCountries = useAppSelector(selectCitiesByCountries);
   const carModels = useAppSelector(selectCarModels);
+  const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
     dispatch(fetchCountries());
@@ -117,11 +119,12 @@ const Storehouses = () => {
   };
   return (
     <Tree
+        header={<h3>Storehouses</h3>}
       value={tree}
       className="w-full md:w-30rem"
       onSelect={onSelect}
       onExpand={onExpand}
-      loading={false}
+      loading={isLoading}
       selectionMode="single"
       nodeTemplate={nodeTemplate}
     />

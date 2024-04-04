@@ -1,16 +1,19 @@
-import "./App.css";
 import Storehouses from "./features/storehouses/Storehouses";
 import { PrimeReactProvider } from "primereact/api";
-import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+import "primereact/resources/themes//lara-dark-amber/theme.css";
 import "primeicons/primeicons.css";
+import classes from "./classes.module.css"
 
 const App = () => {
   return (
     <PrimeReactProvider>
-      <div className="App">
-        <main>
-          <Storehouses />
-        </main>
+      <div className={classes.root}>
+        <div className={classes.left}>
+          <div className={classes.storehouses}><Storehouses /></div>
+        </div>
+        <div>
+          Component Settings
+        </div>
       </div>
     </PrimeReactProvider>
   );

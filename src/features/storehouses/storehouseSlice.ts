@@ -28,9 +28,7 @@ const initialState: StorehouseSlice = {
 
 export const storehousesSlice = createAppSlice({
   name: "storehouses",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: (create) => ({
     fetchCountries: create.asyncThunk(
       async (_: void) => {
@@ -205,6 +203,7 @@ export const storehousesSlice = createAppSlice({
     selectCountries: (state) => state.countries,
     selectCitiesByCountries: (state) => state.citiesByCountries,
     selectCarModels: (state) => state.carModels,
+    selectIsLoading: (state) => state.isLoading,
   },
 });
 
@@ -220,6 +219,5 @@ export const {
   createCarModel,
 } = storehousesSlice.actions;
 
-// Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectCountries, selectCitiesByCountries, selectCarModels } =
+export const { selectCountries, selectCitiesByCountries, selectCarModels, selectIsLoading } =
   storehousesSlice.selectors;
