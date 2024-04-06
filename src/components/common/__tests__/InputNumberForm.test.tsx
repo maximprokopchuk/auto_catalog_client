@@ -1,7 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import AddItems from "../AddItems"
-import { AutoComponent } from "../../../api/storehouseItemsApi"
-import ChildComponentsList from '../ChildComponentList';
 import InputForm from '../InputForm';
 
 describe("InputNumberForm", () => {
