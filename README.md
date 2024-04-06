@@ -4,7 +4,7 @@ Client for https://github.com/maximprokopchuk/auto_catalog_api_server
 
 ## Usage
 
-Create `config/config.ts` file. You can use `config/config.example.ts` as example
+You can change API serverURL in `config/config.ts` file
 
 Install dependencies:
 
