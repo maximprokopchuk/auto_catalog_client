@@ -30,8 +30,8 @@ import { Dialog } from "primereact/dialog";
 import InputNumberForm from "../common/InputNumberForm";
 import ChildComponentsList from "../common/ChildComponentList";
 import AddItems from "../common/AddItems";
-import StorehouseItemInfo from "../common/tables/StorehouseInfo";
-import StorehouseInfo from "../common/tables/StorehouseItemInfo";
+import StorehouseItemInfo from "../common/tables/StorehouseItemInfo";
+import StorehouseInfo from "../common/tables/StorehouseInfo";
 
 const StorehouseItemSettings = () => {
   const cityId = useAppSelector(selectCityId);

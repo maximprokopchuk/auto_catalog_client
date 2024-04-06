@@ -8,20 +8,20 @@ You can change API serverURL in `config/config.ts` file
 
 Install dependencies:
 
-``` bash:
+```bash:
 npm install
 ```
 
 Run dev server:
 
-``` bash:
+```bash:
 npm run
 
 ```
 
 Build:
 
-``` bash:
+```bash:
 npm run build
 ```
 
@@ -29,7 +29,7 @@ npm run build
 
 Run tests:
 
-``` bash:
+```bash:
 npm tests
 ```
 
@@ -37,12 +37,12 @@ npm tests
 
 Run linter:
 
-``` bash:
+```bash:
 npm run lint
 ```
 
 Autoformat code with prettier:
 
-``` bash:
+```bash:
 npm run format
 ```

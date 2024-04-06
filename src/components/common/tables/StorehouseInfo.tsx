@@ -1,46 +1,33 @@
 import { InputText } from "primereact/inputtext";
 import { Panel } from "primereact/panel";
 import classes from "./classes.module.css";
-import { InputNumber } from "primereact/inputnumber";
-import { Button } from "primereact/button";
 
-interface StorehouseItemInfoProps {
-  componentName: string;
-  storehouseItemCount: number;
-  openUpdateComponentModal: () => void;
-  openUpdateItemModal: () => void;
+interface StorehouseInfoProps {
+  cityName: string;
+  carModelName: string;
 }
 
-const StorehouseItemInfo = ({
-  componentName,
-  storehouseItemCount,
-  openUpdateComponentModal,
-  openUpdateItemModal,
-}: StorehouseItemInfoProps) => (
-  <Panel header="Storehouse Item">
+const StorehouseInfo = ({ cityName, carModelName }: StorehouseInfoProps) => (
+  <Panel header="Storehouse">
     <table className={classes.infoTable}>
       <tbody>
         <tr>
-          <td>Component</td>
+          <td>City</td>
           <td>
-            <InputText disabled value={componentName}></InputText>
+            <InputText name="cityName" disabled value={cityName}></InputText>
           </td>
-          <td>
-            <Button onClick={openUpdateComponentModal}>Rename</Button>
-          </td>
+          <td></td>
         </tr>
         <tr>
-          <td>Count</td>
+          <td>Car model</td>
           <td>
-            <InputNumber disabled value={storehouseItemCount}></InputNumber>
+            <InputText disabled value={carModelName}></InputText>
           </td>
-          <td>
-            <Button onClick={openUpdateItemModal}>Change</Button>
-          </td>
+          <td></td>
         </tr>
       </tbody>
     </table>
   </Panel>
 );
 
-export default StorehouseItemInfo;
+export default StorehouseInfo;

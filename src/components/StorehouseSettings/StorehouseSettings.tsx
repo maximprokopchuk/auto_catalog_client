@@ -16,7 +16,7 @@ import { useState } from "react";
 import { AutoComponent } from "../../api/storehouseItemsApi";
 import ChildComponentsList from "../common/ChildComponentList";
 import AddItems from "../common/AddItems";
-import StorehouseInfo from "../common/tables/StorehouseItemInfo";
+import StorehouseInfo from "../common/tables/StorehouseInfo";
 
 const StorehouseSettings = () => {
   const cityId = useAppSelector(selectCityId);
