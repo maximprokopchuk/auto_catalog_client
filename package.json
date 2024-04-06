@@ -11,7 +11,7 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "lint": "eslint '**/*.{ts,tsx}'",
-    "lint:fix": "eslint --fix .",
+    "lint:fix": "eslint --fix '**/*.{ts,tsx}'",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -11,7 +11,6 @@ import {
   selectCarModelById,
   selectCityById,
 } from "../../app/slices/storehouseSlice";
-import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import InputForm from "../common/InputForm";
 import {
@@ -25,14 +24,10 @@ import {
   updateComponent,
   updateStorehouseItem,
 } from "../../app/slices/storehouseItemsSlice";
-import { Dropdown } from "primereact/dropdown";
 import { useState } from "react";
 import { AutoComponent } from "../../api/storehouseItemsApi";
-import { Divider } from "primereact/divider";
-import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import InputNumberForm from "../common/OnEnterNumberInput";
-import { ListBox } from "primereact/listbox";
 import ChildComponentsList from "../common/ChildComponentList";
 import AddItems from "../common/AddItems";
 import StorehouseItemInfo from "../common/tables/StorehouseInfo";
@@ -160,14 +155,18 @@ const StorehouseItemSettings = () => {
         />
       </Dialog>
       <StorehouseInfo carModelName={carModel.name} cityName={city.name} />
-      <StorehouseItemInfo componentName={component.name} storehouseItemCount={storehouseItem.count} openUpdateComponentModal={openUpdateComponentModal} openUpdateItemModal={openUpdateItemModal} />
+      <StorehouseItemInfo
+        componentName={component.name}
+        storehouseItemCount={storehouseItem.count}
+        openUpdateComponentModal={openUpdateComponentModal}
+        openUpdateItemModal={openUpdateItemModal}
+      />
       <ChildComponentsList
         header={`Available "${component.name}"  child components`}
         components={componentForNewItems}
         selectedComponent={selectedComponent}
         onSelect={selectComponent}
         onSubmit={onCreateNewComponent}
-
       />
       <AddItems
         header={`Add "${component.name}" child items to ${city.name} storehouse`}

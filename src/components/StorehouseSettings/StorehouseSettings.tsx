@@ -5,8 +5,6 @@ import {
   selectCarModelById,
   selectCityById,
 } from "../../app/slices/storehouseSlice";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
 import InputForm from "../common/InputForm";
 import {
   createComponentForCarModel,
@@ -14,11 +12,8 @@ import {
   selectComponentsByCarModelId,
   selectItemsByCityAndComponentId,
 } from "../../app/slices/storehouseItemsSlice";
-import { Dropdown } from "primereact/dropdown";
 import { useState } from "react";
 import { AutoComponent } from "../../api/storehouseItemsApi";
-import { Divider } from "primereact/divider";
-import { InputNumber } from "primereact/inputnumber";
 import ChildComponentsList from "../common/ChildComponentList";
 import AddItems from "../common/AddItems";
 import StorehouseInfo from "../common/tables/StorehouseItemInfo";
@@ -79,7 +74,6 @@ const StorehouseSettings = () => {
         selectedComponent={selectedComponent}
         onSelect={selectComponent}
         onSubmit={onCreateNewComponent}
-
       />
 
       <AddItems

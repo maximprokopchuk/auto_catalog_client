@@ -6,7 +6,7 @@ interface OnEnterInputProps {
   placeholder?: string;
   defaultValue?: string;
   onSubmit: (value: string) => void;
-  buttonText: string
+  buttonText: string;
 }
 
 const InputForm = ({
@@ -29,7 +29,7 @@ const InputForm = ({
         value={value || defaultValue || ""}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        onKeyDown={e => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
       />
       <Button type="submit">{buttonText}</Button>
     </form>

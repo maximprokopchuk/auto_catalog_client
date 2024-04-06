@@ -6,8 +6,8 @@ interface OnEnterInputProps {
   placeholder?: string;
   defaultValue?: number;
   onSubmit: (value: number) => void;
-  buttonText: string
-  min?: number
+  buttonText: string;
+  min?: number;
 }
 
 const InputNumberForm = ({
@@ -15,7 +15,7 @@ const InputNumberForm = ({
   onSubmit,
   defaultValue,
   buttonText,
-  min
+  min,
 }: OnEnterInputProps) => {
   const [value, setValue] = useState<number | null>(null);
   return (
@@ -33,7 +33,7 @@ const InputNumberForm = ({
         value={value || defaultValue || null}
         onChange={(e) => setValue(e.value)}
         placeholder={placeholder}
-        onKeyDown={e => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
         min={min}
       />
       <Button type="submit">{buttonText}</Button>
