@@ -21,7 +21,7 @@ export const uiSlice = createAppSlice({
   reducers: () => ({
     setCityIdAndCarModelId: (
       state,
-      action: PayloadAction<{ cityId: number; carModelId: number }>,
+      action: PayloadAction<{ cityId: number | null; carModelId: number | null }>,
     ) => {
       state.cityId = action.payload.cityId;
       state.carModelId = action.payload.carModelId;

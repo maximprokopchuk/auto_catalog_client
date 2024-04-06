@@ -64,6 +64,12 @@ const Storehouses = () => {
     switch (sNode.type) {
       case "country":
         dispatch(deleteCountry(sNode.key as number));
+        dispatch(
+          setCityIdAndCarModelId({
+            cityId: null,
+            carModelId: null
+          })
+        )
         break;
       case "city":
         dispatch(
@@ -72,6 +78,12 @@ const Storehouses = () => {
             countryId: sNode.parentId as number,
           }),
         );
+        dispatch(
+          setCityIdAndCarModelId({
+            cityId: null,
+            carModelId: null
+          })
+        )
         break;
     }
   };
