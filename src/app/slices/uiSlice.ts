@@ -30,7 +30,10 @@ export const uiSlice = createAppSlice({
     },
     setComponentIdAndStorehoiseItemId: (
       state,
-      action: PayloadAction<{ componentId: number | null; storehouseItemId: number | null }>,
+      action: PayloadAction<{
+        componentId: number | null;
+        storehouseItemId: number | null;
+      }>,
     ) => {
       state.componentId = action.payload.componentId;
       state.storehouseItemId = action.payload.storehouseItemId;

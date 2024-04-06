@@ -98,11 +98,12 @@ export const getStorehouseItemsRequest: (
     .then((response) => response.json())
     .then((response) => response.result);
 
-
-    export const deleteStorehouseItemRequest: (id: number) => Promise<Response> = (id) =>
-      fetch(`${config.api_url}/items/${id}/`, {
-        method: "DELETE",
-      });
+export const deleteStorehouseItemRequest: (id: number) => Promise<Response> = (
+  id,
+) =>
+  fetch(`${config.api_url}/items/${id}/`, {
+    method: "DELETE",
+  });
 
 export const updateStorehouseITemRequest: ({
   itemId,

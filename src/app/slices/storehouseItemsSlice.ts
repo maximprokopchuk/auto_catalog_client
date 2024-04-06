@@ -51,15 +51,14 @@ export const storehousComponentsSlice = createAppSlice({
         const componentsIds = componentsResponse.map(
           (component) => component.id,
         );
-        let storehouseItems: StorehouseItem[] = []
-        try
-        {
+        let storehouseItems: StorehouseItem[] = [];
+        try {
           storehouseItems = await getStorehouseItemsRequest(
             cityId,
             componentsIds,
           );
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
         return {
           componentsResponse,
@@ -81,11 +80,11 @@ export const storehousComponentsSlice = createAppSlice({
           action.payload.storehouseItems.forEach((item) => {
             state.storehouseItemByCityComponentId[cityId][item.component_id] =
               item;
-            
-            state.storehouseItemById[item.id] = item
+
+            state.storehouseItemById[item.id] = item;
           });
           action.payload.componentsResponse.forEach((compoennt) => {
-            state.componentById[compoennt.id] = compoennt
+            state.componentById[compoennt.id] = compoennt;
           });
         },
         rejected: (state, action) => {
@@ -108,15 +107,14 @@ export const storehousComponentsSlice = createAppSlice({
           (component) => component.id,
         );
 
-        let storehouseItems: StorehouseItem[] = []
-        try
-        {
+        let storehouseItems: StorehouseItem[] = [];
+        try {
           storehouseItems = await getStorehouseItemsRequest(
             cityId,
             componentsIds,
           );
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
         return {
           componentsResponse,
@@ -139,10 +137,10 @@ export const storehousComponentsSlice = createAppSlice({
           action.payload.storehouseItems.forEach((item) => {
             state.storehouseItemByCityComponentId[cityId][item.component_id] =
               item;
-              state.storehouseItemById[item.id] = item
+            state.storehouseItemById[item.id] = item;
           });
           action.payload.componentsResponse.forEach((component) => {
-            state.componentById[component.id] = component
+            state.componentById[component.id] = component;
           });
         },
         rejected: (state) => {
@@ -173,7 +171,9 @@ export const storehousComponentsSlice = createAppSlice({
     createComponentForParentComponent: create.asyncThunk(
       async (params: { name: string; parentComponentId: number }) => {
         await createComponentForParentComponentRequest(params);
-        const response = await getChildComponentsRequest(params.parentComponentId);
+        const response = await getChildComponentsRequest(
+          params.parentComponentId,
+        );
         return response;
       },
       {
@@ -182,11 +182,12 @@ export const storehousComponentsSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.isLoading = false;
-          const components = action.payload || []
-          state.componentsByParentId[action.meta.arg.parentComponentId] = components;
+          const components = action.payload || [];
+          state.componentsByParentId[action.meta.arg.parentComponentId] =
+            components;
           components.forEach((component) => {
-              state.componentById[component.id] = component
-            });
+            state.componentById[component.id] = component;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -206,13 +207,21 @@ export const storehousComponentsSlice = createAppSlice({
           state.isLoading = false;
           const component = action.payload;
           if (component.parent_id) {
-            state.componentsByParentId[component.parent_id] = state.componentsByParentId[component.parent_id].filter(c => c.id != component.id)
-            state.componentsByParentId[component.parent_id].push(component)
+            state.componentsByParentId[component.parent_id] =
+              state.componentsByParentId[component.parent_id].filter(
+                (c) => c.id != component.id,
+              );
+            state.componentsByParentId[component.parent_id].push(component);
           } else if (component.car_model_id) {
-            state.componentsByCarModelId[component.car_model_id] = state.componentsByCarModelId[component.car_model_id].filter(c => c.id != component.id)
-            state.componentsByCarModelId[component.car_model_id].push(component)
+            state.componentsByCarModelId[component.car_model_id] =
+              state.componentsByCarModelId[component.car_model_id].filter(
+                (c) => c.id != component.id,
+              );
+            state.componentsByCarModelId[component.car_model_id].push(
+              component,
+            );
           }
-          state.componentById[component.id] = component
+          state.componentById[component.id] = component;
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -221,13 +230,13 @@ export const storehousComponentsSlice = createAppSlice({
     ),
     deleteStorehouseItem: create.asyncThunk(
       async ({
-        id
+        id,
       }: {
-        id: number,
-        cityId: number,
-        parentComponentId: number,
-        carModelId: number
-        componentId: number,
+        id: number;
+        cityId: number;
+        parentComponentId: number;
+        carModelId: number;
+        componentId: number;
       }) => {
         await deleteStorehouseItemRequest(id);
       },
@@ -237,19 +246,21 @@ export const storehousComponentsSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           function deleteChildsFromState(parentId: number) {
-            const components = state.componentsByParentId[parentId] || []
-            components.forEach(component => {
-              delete state.storehouseItemByCityComponentId[cityId][component.id]
-              deleteChildsFromState(component.id)
-            })
+            const components = state.componentsByParentId[parentId] || [];
+            components.forEach((component) => {
+              delete state.storehouseItemByCityComponentId[cityId][
+                component.id
+              ];
+              deleteChildsFromState(component.id);
+            });
           }
           state.isLoading = false;
           const cityId = action.meta.arg.cityId;
           const componentId = action.meta.arg.componentId;
-          const itemId = action.meta.arg.id
-          delete state.storehouseItemByCityComponentId[cityId][componentId]
-          delete state.storehouseItemById[itemId]
-          deleteChildsFromState(componentId)
+          const itemId = action.meta.arg.id;
+          delete state.storehouseItemByCityComponentId[cityId][componentId];
+          delete state.storehouseItemById[itemId];
+          deleteChildsFromState(componentId);
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -278,13 +289,13 @@ export const storehousComponentsSlice = createAppSlice({
           if (!action.payload.length) {
             throw new Error();
           }
-          const item = action.payload[0]
+          const item = action.payload[0];
           state.isLoading = false;
           if (!state.storehouseItemByCityComponentId[cityId]) {
             state.storehouseItemByCityComponentId[cityId] = {};
           }
           state.storehouseItemByCityComponentId[cityId][componentId] = item;
-          state.storehouseItemById[item.id] = item
+          state.storehouseItemById[item.id] = item;
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -292,7 +303,7 @@ export const storehousComponentsSlice = createAppSlice({
       },
     ),
     updateStorehouseItem: create.asyncThunk(
-      async (params: { count: number; itemId: number, cityId: number }) => {
+      async (params: { count: number; itemId: number; cityId: number }) => {
         const response = await updateStorehouseITemRequest(params);
         return response;
       },
@@ -303,9 +314,10 @@ export const storehousComponentsSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           const item = action.payload;
-          const cityId = action.meta.arg.cityId
-          state.storehouseItemById[item.id] = item
-          state.storehouseItemByCityComponentId[cityId][item.component_id] = item
+          const cityId = action.meta.arg.cityId;
+          state.storehouseItemById[item.id] = item;
+          state.storehouseItemByCityComponentId[cityId][item.component_id] =
+            item;
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -316,8 +328,8 @@ export const storehousComponentsSlice = createAppSlice({
   selectors: {
     selectComponentsByParentId: (state) => state.componentsByParentId,
     selectComponentsByCarModelId: (state) => state.componentsByCarModelId,
-    selectComponentById: state => state.componentById,
-    selectStorehouseItemById: state => state.storehouseItemById,
+    selectComponentById: (state) => state.componentById,
+    selectStorehouseItemById: (state) => state.storehouseItemById,
     selectItemsByCityAndComponentId: (state) =>
       state.storehouseItemByCityComponentId,
     selectIsLoading: (state) => state.isLoading,

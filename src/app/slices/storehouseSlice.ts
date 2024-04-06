@@ -15,9 +15,9 @@ import { CarModel, City, Country } from "../../api/storehousesApi";
 export interface StorehouseSlice {
   countries: Country[];
   citiesByCountries: Record<number, City[]>;
-  cityById: Record<number, City>
+  cityById: Record<number, City>;
   carModels: CarModel[];
-  carModelById: Record<number, CarModel>
+  carModelById: Record<number, CarModel>;
   isLoading: boolean;
 }
 
@@ -102,10 +102,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.citiesByCountries[action.meta.arg] = action.payload;
-          action.payload.forEach(city => {
-            state.cityById[city.id] = city
-          })
-
+          action.payload.forEach((city) => {
+            state.cityById[city.id] = city;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -125,9 +124,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.citiesByCountries[action.meta.arg.countryId] = action.payload;
-          action.payload.forEach(city => {
-            state.cityById[city.id] = city
-          })
+          action.payload.forEach((city) => {
+            state.cityById[city.id] = city;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -147,9 +146,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.citiesByCountries[action.meta.arg.countryId] = action.payload;
-          action.payload.forEach(city => {
-            state.cityById[city.id] = city
-          })
+          action.payload.forEach((city) => {
+            state.cityById[city.id] = city;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -168,9 +167,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.carModels = action.payload;
-          action.payload.forEach(carModel => {
-            state.carModelById[carModel.id] = carModel
-          })
+          action.payload.forEach((carModel) => {
+            state.carModelById[carModel.id] = carModel;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -190,9 +189,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.carModels = action.payload;
-          action.payload.forEach(carModel => {
-            state.carModelById[carModel.id] = carModel
-          })
+          action.payload.forEach((carModel) => {
+            state.carModelById[carModel.id] = carModel;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -212,9 +211,9 @@ export const storehousesSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.isLoading = false;
           state.carModels = action.payload;
-          action.payload.forEach(carModel => {
-            state.carModelById[carModel.id] = carModel
-          })
+          action.payload.forEach((carModel) => {
+            state.carModelById[carModel.id] = carModel;
+          });
         },
         rejected: (state) => {
           state.isLoading = false;
@@ -225,10 +224,10 @@ export const storehousesSlice = createAppSlice({
   selectors: {
     selectCountries: (state) => state.countries,
     selectCitiesByCountries: (state) => state.citiesByCountries,
-    selectCityById: state => state.cityById,
+    selectCityById: (state) => state.cityById,
     selectCarModels: (state) => state.carModels,
     selectIsLoading: (state) => state.isLoading,
-    selectCarModelById: state => state.carModelById,
+    selectCarModelById: (state) => state.carModelById,
   },
 });
 
