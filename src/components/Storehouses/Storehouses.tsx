@@ -2,7 +2,7 @@ import "../../api/storehousesApi";
 import { Tree } from "primereact/tree";
 import { TreeNode } from "primereact/treenode/treenode";
 import { TreeEventNodeEvent } from "primereact/tree/tree";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect } from "react";
 import classes from "./classes.module.css";
 import {
   fetchCities,

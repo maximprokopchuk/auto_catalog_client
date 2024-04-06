@@ -1,6 +1,6 @@
 import { Panel } from "primereact/panel";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectCarModelId, selectCityId, selectComponentId, selectStorehouseItemId, setCityIdAndCarModelId, setComponentIdAndStorehoiseItemId } from "../../app/slices/uiSlice";
+import { selectCarModelId, selectCityId, selectComponentId, selectStorehouseItemId, setComponentIdAndStorehoiseItemId } from "../../app/slices/uiSlice";
 import {
   selectCarModelById,
   selectCityById,

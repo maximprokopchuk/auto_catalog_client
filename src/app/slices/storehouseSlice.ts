@@ -34,8 +34,8 @@ export const storehousesSlice = createAppSlice({
   name: "storehouses",
   initialState,
   reducers: (create) => ({
-    fetchCountries: create.asyncThunk(
-      async (_: void) => {
+    fetchCountries: create.asyncThunk<Country[], void>(
+      async () => {
         const response = await getCountriesRequest();
         return response;
       },
@@ -156,8 +156,8 @@ export const storehousesSlice = createAppSlice({
         },
       },
     ),
-    fetchCarModels: create.asyncThunk(
-      async (_: void) => {
+    fetchCarModels: create.asyncThunk<CarModel[], void>(
+      async () => {
         const response = await getCarModelsRequest();
         return response;
       },

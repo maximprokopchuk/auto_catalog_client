@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectCarModelId, selectCityId } from "../../app/slices/uiSlice";
 import {
   selectCarModelById,
-  selectCarModels,
   selectCityById,
 } from "../../app/slices/storehouseSlice";
 import { InputText } from "primereact/inputtext";

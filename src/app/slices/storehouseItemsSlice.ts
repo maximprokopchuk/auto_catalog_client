@@ -12,7 +12,6 @@ import {
   updateComponentRequest,
   updateStorehouseITemRequest,
 } from "../../api/storehouseItemsApi";
-import { Draft } from "@reduxjs/toolkit";
 
 export interface StorehouseItemsSlice {
   componentsByParentId: Record<number, AutoComponent[]>;

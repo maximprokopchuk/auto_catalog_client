@@ -15,7 +15,7 @@ import {
   selectCityId,
   setComponentIdAndStorehoiseItemId,
 } from "../../app/slices/uiSlice";
-import { AutoComponent, StorehouseItem } from "../../api/storehouseItemsApi";
+import { AutoComponent } from "../../api/storehouseItemsApi";
 import { Panel } from "primereact/panel";
 
 interface StorehouseItemTreeNode extends TreeNode {
