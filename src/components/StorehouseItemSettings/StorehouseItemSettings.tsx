@@ -27,7 +27,7 @@ import {
 import { useState } from "react";
 import { AutoComponent } from "../../api/storehouseItemsApi";
 import { Dialog } from "primereact/dialog";
-import InputNumberForm from "../common/OnEnterNumberInput";
+import InputNumberForm from "../common/InputFormNumber";
 import ChildComponentsList from "../common/ChildComponentList";
 import AddItems from "../common/AddItems";
 import StorehouseItemInfo from "../common/tables/StorehouseInfo";
