@@ -159,9 +159,12 @@ export const storehousComponentsSlice = createAppSlice({
           state.isLoading = true;
         },
         fulfilled: (state, action) => {
+          const components = action.payload || [];
           state.isLoading = false;
-          state.componentsByCarModelId[action.meta.arg.carModelId] =
-            action.payload;
+          state.componentsByCarModelId[action.meta.arg.carModelId] = components;
+            components.forEach((component) => {
+              state.componentById[component.id] = component;
+            });
         },
         rejected: (state) => {
           state.isLoading = false;
