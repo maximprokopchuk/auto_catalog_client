@@ -7,7 +7,7 @@ import {
 } from "../../app/slices/storehouseSlice";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import OnEnterInput from "../OnEnterInput";
+import InputForm from "../common/InputForm";
 import {
   createComponentForCarModel,
   createStorehouseItem,
@@ -19,6 +19,9 @@ import { useState } from "react";
 import { AutoComponent } from "../../api/storehouseItemsApi";
 import { Divider } from "primereact/divider";
 import { InputNumber } from "primereact/inputnumber";
+import ChildComponentsList from "../common/ChildComponentList";
+import AddItems from "../common/AddItems";
+import StorehouseInfo from "../common/tables/StorehouseItemInfo";
 
 const StorehouseSettings = () => {
   const cityId = useAppSelector(selectCityId);
@@ -69,40 +72,30 @@ const StorehouseSettings = () => {
 
   return (
     <>
-      <Panel header="Storehouse">
-        <div className="p-inputgroup">
-          <InputText disabled value={city.name}></InputText>
-        </div>
-      </Panel>
-      <Panel header={`Add "${carModel.name}" items to ${city.name} storehouse`}>
-        <div className="p-inputgroup">
-          <Dropdown
-            placeholder="Select component name"
-            options={componentForNewItems}
-            optionLabel="name"
-            value={selectedComponent}
-            onChange={(e) => selectComponent(e.value)}
-          />
-        </div>
-        <div className="p-inputgroup">
-          <InputNumber
-            value={count}
-            onChange={(e) => setCount(e.value)}
-            placeholder="Count"
-          ></InputNumber>
-        </div>
-        <Divider />
-        <Button
-          disabled={!count || count < 1 || !selectedComponent}
-          onClick={onAddStorehouseItem}
-        >
-          Add
-        </Button>
-      </Panel>
+      <StorehouseInfo carModelName={carModel.name} cityName={city.name} />
+      <ChildComponentsList
+        header={`Available "${carModel.name}" components`}
+        components={componentForNewItems}
+        selectedComponent={selectedComponent}
+        onSelect={selectComponent}
+        onSubmit={onCreateNewComponent}
+
+      />
+
+      <AddItems
+        header={`Add "${carModel.name}" items to ${city.name} storehouse`}
+        components={componentForNewItems}
+        selectedComponent={selectedComponent}
+        count={count}
+        changeCount={setCount}
+        onAdd={onAddStorehouseItem}
+        onSelect={selectComponent}
+      />
       <Panel header={`Add "${carModel.name}" components`}>
-        <OnEnterInput
+        <InputForm
           onSubmit={onCreateNewComponent}
           placeholder="New component name"
+          buttonText="Add"
         />
       </Panel>
     </>

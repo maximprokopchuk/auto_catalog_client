@@ -13,7 +13,7 @@ import {
 } from "../../app/slices/storehouseSlice";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import OnEnterInput from "../OnEnterInput";
+import InputForm from "../common/InputForm";
 import {
   createComponentForParentComponent,
   createStorehouseItem,
@@ -31,8 +31,12 @@ import { AutoComponent } from "../../api/storehouseItemsApi";
 import { Divider } from "primereact/divider";
 import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
-import OnEnterNumberInput from "../OnEnterNumberInput";
-import classes from "./classes.module.css";
+import InputNumberForm from "../common/OnEnterNumberInput";
+import { ListBox } from "primereact/listbox";
+import ChildComponentsList from "../common/ChildComponentList";
+import AddItems from "../common/AddItems";
+import StorehouseItemInfo from "../common/tables/StorehouseInfo";
+import StorehouseInfo from "../common/tables/StorehouseItemInfo";
 
 const StorehouseItemSettings = () => {
   const cityId = useAppSelector(selectCityId);
@@ -136,9 +140,10 @@ const StorehouseItemSettings = () => {
         visible={isUpdateComponentModalOpen}
         onHide={closeUpdateComponentModal}
       >
-        <OnEnterInput
+        <InputForm
           defaultValue={component.name}
           onSubmit={onRenameComponent}
+          buttonText="Rename"
         />
       </Dialog>
 
@@ -147,89 +152,32 @@ const StorehouseItemSettings = () => {
         visible={isUpdateItemModalOpen}
         onHide={closeUpdateItemModal}
       >
-        <OnEnterNumberInput
+        <InputNumberForm
           defaultValue={storehouseItem.count}
           onSubmit={onUpdateCount}
+          min={1}
+          buttonText="Change"
         />
       </Dialog>
-      <Panel header="Storehouse">
-        <table className={classes.infoTable}>
-          <tbody>
-            <tr>
-              <td>City</td>
-              <td>
-                <InputText
-                  name="cityName"
-                  disabled
-                  value={city.name}
-                ></InputText>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Car model</td>
-              <td>
-                <InputText disabled value={carModel.name}></InputText>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Component</td>
-              <td>
-                <InputText disabled value={component.name}></InputText>
-              </td>
-              <td>
-                <Button onClick={openUpdateComponentModal}>Rename</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Count</td>
-              <td>
-                <InputNumber
-                  disabled
-                  value={storehouseItem.count}
-                ></InputNumber>
-              </td>
-              <td>
-                <Button onClick={openUpdateItemModal}>Change</Button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Panel>
-      <Panel
+      <StorehouseInfo carModelName={carModel.name} cityName={city.name} />
+      <StorehouseItemInfo componentName={component.name} storehouseItemCount={storehouseItem.count} openUpdateComponentModal={openUpdateComponentModal} openUpdateItemModal={openUpdateItemModal} />
+      <ChildComponentsList
+        header={`Available "${component.name}"  child components`}
+        components={componentForNewItems}
+        selectedComponent={selectedComponent}
+        onSelect={selectComponent}
+        onSubmit={onCreateNewComponent}
+
+      />
+      <AddItems
         header={`Add "${component.name}" child items to ${city.name} storehouse`}
-      >
-        <div className="p-inputgroup">
-          <Dropdown
-            placeholder="Select component name"
-            options={componentForNewItems}
-            optionLabel="name"
-            value={selectedComponent}
-            onChange={(e) => selectComponent(e.value)}
-          />
-        </div>
-        <div className="p-inputgroup">
-          <InputNumber
-            value={count}
-            onChange={(e) => setCount(e.value)}
-            placeholder="Count"
-          ></InputNumber>
-        </div>
-        <Divider />
-        <Button
-          disabled={!count || count < 1 || !selectedComponent}
-          onClick={onAddStorehouseItem}
-        >
-          Add
-        </Button>
-      </Panel>
-      <Panel header={`Add "${component.name}" components`}>
-        <OnEnterInput
-          onSubmit={onCreateNewComponent}
-          placeholder="New component name"
-        />
-      </Panel>
+        components={componentForNewItems}
+        selectedComponent={selectedComponent}
+        count={count}
+        changeCount={setCount}
+        onAdd={onAddStorehouseItem}
+        onSelect={selectComponent}
+      />
       <Panel header={`Delete "${component.name}" storehouse item`}>
         <Button onClick={onDelete}>Delete</Button>
       </Panel>

@@ -18,7 +18,7 @@ import {
   selectIsLoading,
 } from "../../app/slices/storehouseSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import OnEnterInput from "../OnEnterInput";
+import InputForm from "../common/InputForm";
 import { StorehouseNode, getTree } from "./helpers";
 import { setCityIdAndCarModelId } from "../../app/slices/uiSlice";
 import { Panel } from "primereact/panel";
@@ -79,17 +79,18 @@ const Storehouses = () => {
     const sNode = node as StorehouseNode;
     if (sNode.type === "country_input") {
       return (
-        <OnEnterInput
-          placeholder="Add new country"
+        <InputForm
+          placeholder="New country"
           onSubmit={(name) => dispatch(createCountry(name))}
+          buttonText="Add"
         />
       );
     }
     if (sNode.type === "city_input") {
       const countryId = sNode.parentId as number;
       return (
-        <OnEnterInput
-          placeholder="Add new city"
+        <InputForm
+          placeholder="New city"
           onSubmit={(name) =>
             dispatch(
               createCity({
@@ -98,6 +99,7 @@ const Storehouses = () => {
               }),
             )
           }
+          buttonText="Add"
         />
       );
     }

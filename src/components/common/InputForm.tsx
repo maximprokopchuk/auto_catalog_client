@@ -6,12 +6,14 @@ interface OnEnterInputProps {
   placeholder?: string;
   defaultValue?: string;
   onSubmit: (value: string) => void;
+  buttonText: string
 }
 
-const OnEnterInput = ({
+const InputForm = ({
   placeholder,
   onSubmit,
   defaultValue,
+  buttonText,
 }: OnEnterInputProps) => {
   const [value, setValue] = useState("");
   return (
@@ -27,10 +29,11 @@ const OnEnterInput = ({
         value={value || defaultValue || ""}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
+        onKeyDown={e => e.stopPropagation()}
       />
-      <Button type="submit">Add</Button>
+      <Button type="submit">{buttonText}</Button>
     </form>
   );
 };
 
-export default OnEnterInput;
+export default InputForm;

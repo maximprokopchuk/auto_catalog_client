@@ -12,7 +12,7 @@ import {
 import { ListBox } from "primereact/listbox";
 import { CarModel } from "../../api/storehousesApi";
 import { Divider } from "primereact/divider";
-import OnEnterInput from "../OnEnterInput";
+import InputForm from "../common/InputForm";
 
 const CarModels = () => {
   const [isModalOpen, setIsModelOpen] = useState(false);
@@ -48,9 +48,10 @@ const CarModels = () => {
           Delete
         </Button>
         <Divider />
-        <OnEnterInput
+        <InputForm
           placeholder="Add new car model"
           onSubmit={(name) => dispatch(createCarModel(name))}
+          buttonText="Add"
         />
       </Dialog>
       <Panel header="Car models">
